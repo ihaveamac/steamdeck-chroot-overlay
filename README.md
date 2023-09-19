@@ -8,14 +8,13 @@ Super not tested and probably buggy!!!
 
 ## Usage
 
-./makefsroot.sh
+Before chrooting, if you are using systemd-sysext, you might want to do `systemd-sysext unmerge` first, or the chroot will not see the real root fs.
 
-./makebinds.sh
-
-sudo arch-chroot ./bindmount
-
-(do your stuff)
-
-./unmakebinds.sh
+* ./makefsroot.sh
+* ./chroot.sh
 
 now use upper-dirs as the basis for your extension
+
+## Extensions
+
+To make an extension use `./makeextension.sh <ext-name>`; this will check for file dupes compared to the root fs, so the extension will only include new or different files.

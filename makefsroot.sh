@@ -1,9 +1,18 @@
 #!/bin/bash
-if [[ "$(id -u)" -ne 0 ]]; then
-    echo "$(basename $0) needs to be run as root"
-    sudo bash "$0" "$*"
-    exit
+if [ -e fs-root-base ]; then
+	echo "fs-root-base already exists!"
+	echo "do this to destroy it all:"
+	echo "$ sudo rm -r fs-root-base upper-dirs work-dirs"
+	exit
 fi
+
+if [[ "$(id -u)" -ne 0 ]]; then
+	echo "$(basename $0) needs to be run as root"
+	sudo bash "$0" "$*"
+	exit
+fi
+
+set -x
 
 mkdir ./fs-root-base
 for f in dev etc proc run sys tmp usr var home; do
